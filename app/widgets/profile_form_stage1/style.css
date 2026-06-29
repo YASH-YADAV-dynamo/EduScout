@@ -1,0 +1,7 @@
+.card { padding: 16px; }
+.step-content label { display: block; margin: 10px 0; font-size: 0.875rem; color: var(--text-muted); }
+.text-input { width: 100%; margin-top: 4px; padding: 8px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface-2); color: var(--text); }
+.btn.primary { background: var(--accent); color: #fff; border: none; padding: 10px 16px; border-radius: 8px; cursor: pointer; }
+.progress { height: 4px; background: var(--border); border-radius: 4px; margin: 12px 0; }
+.progress-bar { height: 100%; background: var(--accent); border-radius: 4px; }
+.status.error { color: #f87171; }

@@ -1,0 +1,73 @@
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
+.stage-card {
+  max-height: min(480px, 72vh);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 0;
+}
+
+.stage-card > .header {
+  flex-shrink: 0;
+  padding: 16px 16px 0;
+}
+
+.form-scroll {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  padding: 8px 16px;
+  touch-action: pan-y;
+}
+
+.stage-card > .actions {
+  flex-shrink: 0;
+  padding: 12px 16px 16px;
+  margin: 0;
+  border-top: 1px solid var(--border-subtle);
+  background: var(--bg-elevated);
+}
+
+.stage-card > .status {
+  flex-shrink: 0;
+  margin: 0 16px 12px;
+}
+
+.step-content label {
+  display: block;
+  margin: 10px 0;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+.text-input {
+  width: 100%;
+  margin-top: 4px;
+}
+
+.progress {
+  height: 4px;
+  background: var(--bg-input);
+  border-radius: 999px;
+  margin: 12px 0;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  background: var(--accent-strong);
+  border-radius: 999px;
+}
+
+.hint {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  margin: 8px 0;
+}

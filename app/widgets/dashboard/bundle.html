@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard</title>
+  <style>/* ChatGPT-inspired dark theme — grey + chalk */
+:root {
+  color-scheme: dark;
+
+  --bg: #212121;
+  --bg-elevated: #2f2f2f;
+  --bg-input: #383838;
+  --bg-hover: #3d3d3d;
+  --bg-selected: #404040;
+
+  --border: #4a4a4a;
+  --border-subtle: #3a3a3a;
+
+  --text: #ececec;
+  --text-muted: #b4b4b4;
+  --text-dim: #8e8e8e;
+
+  --accent: #d1d1d1;
+  --accent-strong: #f5f5f5;
+
+  --success-bg: #2a332a;
+  --success-text: #b8c9b8;
+  --error-bg: #3a2a2a;
+  --error-text: #d4a8a8;
+
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: "Söhne", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 12px;
+  font-family: var(--font);
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+.card {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius);
+  padding: 20px;
+  max-width: 520px;
+}
+
+h1 {
+  margin: 6px 0 14px;
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--accent-strong);
+}
+
+h2 {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin: 0 0 8px;
+}
+
+.eyebrow {
+  margin: 0;
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  font-weight: 500;
+}
+
+.hint {
+  margin-top: 8px;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  line-height: 1.4;
+}
+
+.btn {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 16px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.btn.primary {
+  background: var(--accent-strong);
+  color: #171717;
+  border-color: var(--accent-strong);
+}
+
+.btn.primary:hover:not(:disabled) {
+  background: #ffffff;
+}
+
+.btn.primary:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.btn.secondary {
+  background: transparent;
+  color: var(--text-muted);
+}
+
+.btn.secondary:hover {
+  background: var(--bg-hover);
+  color: var(--text);
+}
+
+.text-input,
+.select-input {
+  width: 100%;
+  padding: 11px 13px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 0.9375rem;
+  outline: none;
+  font-family: inherit;
+  color: var(--text);
+  background: var(--bg-input);
+}
+
+.text-input::placeholder {
+  color: var(--text-dim);
+}
+
+.text-input:focus,
+.select-input:focus {
+  border-color: #6b6b6b;
+  box-shadow: 0 0 0 1px #6b6b6b;
+}
+
+.status {
+  margin-top: 14px;
+  padding: 11px 13px;
+  border-radius: var(--radius-sm);
+  background: var(--success-bg);
+  color: var(--success-text);
+  font-size: 0.8125rem;
+  border: 1px solid var(--border-subtle);
+}
+
+.status.error {
+  background: var(--error-bg);
+  color: var(--error-text);
+}
+
+.badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.6875rem;
+  background: var(--bg-selected);
+  color: var(--text-muted);
+  border: 1px solid var(--border-subtle);
+  margin-left: 8px;
+}
+
+.code {
+  font-family: ui-monospace, "Cascadia Code", monospace;
+  font-size: 1.125rem;
+  letter-spacing: 0.08em;
+  color: var(--accent-strong);
+}
+
+.overdue {
+  color: #c9a0a0;
+}
+
+ul {
+  padding-left: 18px;
+  margin: 0;
+  color: var(--text-muted);
+}
+
+section {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+section:first-of-type {
+  border-top: none;
+  padding-top: 0;
+}
+
+
+.dashboard {
+  max-width: 100%;
+}
+
+.dash-header {
+  margin-bottom: 14px;
+}
+
+.plan-meta {
+  margin: 4px 0 0;
+  font-size: 0.8125rem;
+  color: var(--text-dim);
+}
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.profile-chip {
+  font-size: 0.75rem;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.stat {
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 12px 10px;
+  text-align: center;
+}
+
+.stat-value {
+  display: block;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--accent-strong);
+  line-height: 1.2;
+}
+
+.stat-label {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-dim);
+}
+
+.panel {
+  margin-top: 12px;
+  padding: 14px;
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+}
+
+.panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.panel-head h2 {
+  margin: 0;
+}
+
+.panel-count {
+  font-size: 0.6875rem;
+  color: var(--text-dim);
+}
+
+.item-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.item-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--border-subtle);
+  font-size: 0.875rem;
+  color: var(--text);
+}
+
+.item-list li:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.item-list li:first-child {
+  padding-top: 0;
+}
+
+.task-date {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  white-space: nowrap;
+}
+
+.uni-groups {
+  display: grid;
+  gap: 10px;
+}
+
+.uni-group-title {
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-dim);
+  margin-bottom: 4px;
+}
+
+.uni-group ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.uni-group li {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  padding: 3px 0;
+}
+
+.empty-state {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: var(--text-dim);
+  font-style: italic;
+  line-height: 1.45;
+}
+
+.link-panel h2 {
+  margin-bottom: 6px;
+}
+
+.link-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  padding: 12px;
+  background: var(--bg-elevated);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-sm);
+}
+
+.link-box .code {
+  flex: 1;
+  font-size: 1.375rem;
+  letter-spacing: 0.14em;
+}
+
+.btn-sm {
+  padding: 6px 12px;
+  font-size: 0.75rem;
+}
+
+.link-hint {
+  margin-top: 8px;
+}
+
+.link-hint strong {
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.dashboard section.panel + section.panel {
+  border-top: none;
+  padding-top: 14px;
+}
+</style>
+</head>
+<body>
+  <main class="card dashboard">
+    <header class="dash-header">
+      <p class="eyebrow">Your plan</p>
+      <h1 id="plan-title">Study Plan</h1>
+      <p id="plan-meta" class="plan-meta"></p>
+    </header>
+
+    <div id="profile-chips" class="chip-row"></div>
+
+    <div class="stats-grid">
+      <div class="stat">
+        <span id="stat-tasks" class="stat-value">0</span>
+        <span class="stat-label">Tasks</span>
+      </div>
+      <div class="stat">
+        <span id="stat-pending" class="stat-value">0</span>
+        <span class="stat-label">Pending</span>
+      </div>
+      <div class="stat">
+        <span id="stat-unis" class="stat-value">0</span>
+        <span class="stat-label">Universities</span>
+      </div>
+    </div>
+
+    <section class="panel">
+      <div class="panel-head">
+        <h2>Upcoming tasks</h2>
+        <span id="tasks-count" class="panel-count"></span>
+      </div>
+      <ul id="tasks" class="item-list"></ul>
+      <p id="tasks-empty" class="empty-state" hidden>No tasks yet — ask the agent to add deadlines.</p>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <h2>University shortlist</h2>
+        <span id="unis-count" class="panel-count"></span>
+      </div>
+      <div id="universities" class="uni-groups"></div>
+      <p id="unis-empty" class="empty-state" hidden>No universities yet — ask the agent to build your shortlist.</p>
+    </section>
+
+    <section class="panel link-panel">
+      <h2>Connect notifications</h2>
+      <p class="hint">Link WhatsApp or Telegram to get deadline reminders.</p>
+      <div class="link-box">
+        <span id="link-code" class="code">——</span>
+        <button id="copy-btn" type="button" class="btn secondary btn-sm">Copy</button>
+      </div>
+      <p class="hint link-hint">Send <strong>LINK CODE</strong> on WhatsApp or <strong>/link CODE</strong> on Telegram.</p>
+    </section>
+  </main>
+  <script>const bridge = window.openai ?? {};
+
+function readPayload() {
+  const output = bridge.toolOutput;
+  if (!output) return {};
+  if (output.structuredContent && typeof output.structuredContent === "object") {
+    return output.structuredContent;
+  }
+  if (typeof output === "object" && !Array.isArray(output)) {
+    return output;
+  }
+  return {};
+}
+
+const data = { ...readPayload(), ...(bridge.toolInput ?? {}) };
+
+const profile = data.profile ?? {};
+const tasks = data.tasks ?? [];
+const universities = data.universities ?? [];
+const stats = data.stats ?? {};
+const today = new Date().toISOString().slice(0, 10);
+
+document.getElementById("plan-title").textContent = data.plan_title ?? "Study Plan";
+
+const metaParts = [];
+if (profile.region) metaParts.push(profile.region);
+if (profile.target_intake) metaParts.push(`Intake ${profile.target_intake}`);
+if (data.plan_status) metaParts.push(data.plan_status.replace("_", " "));
+document.getElementById("plan-meta").textContent =
+  metaParts.join(" · ") || "Complete your profile to personalize this plan";
+
+const chipsEl = document.getElementById("profile-chips");
+const chipFields = [
+  ["degree", profile.degree],
+  ["major", profile.major],
+  ["CGPA", profile.cgpa],
+  ["budget", profile.budget_range],
+  ["priority", profile.priority],
+];
+for (const [, value] of chipFields) {
+  if (!value) continue;
+  const chip = document.createElement("span");
+  chip.className = "profile-chip";
+  chip.textContent = value;
+  chipsEl.appendChild(chip);
+}
+if (!chipsEl.children.length) {
+  chipsEl.innerHTML = '<span class="profile-chip">Profile not filled — open the planning widget</span>';
+}
+
+document.getElementById("stat-tasks").textContent = stats.tasks_total ?? tasks.length;
+document.getElementById("stat-pending").textContent =
+  stats.tasks_pending ?? tasks.filter((t) => t.status === "pending").length;
+document.getElementById("stat-unis").textContent = stats.universities_total ?? universities.length;
+
+const tasksEl = document.getElementById("tasks");
+const tasksEmpty = document.getElementById("tasks-empty");
+document.getElementById("tasks-count").textContent = tasks.length ? `${tasks.length} total` : "";
+
+if (!tasks.length) {
+  tasksEmpty.hidden = false;
+} else {
+  tasksEmpty.hidden = true;
+  const sorted = [...tasks].sort((a, b) => {
+    if (!a.due_date) return 1;
+    if (!b.due_date) return -1;
+    return a.due_date.localeCompare(b.due_date);
+  });
+  for (const task of sorted.slice(0, 6)) {
+    const li = document.createElement("li");
+    const overdue = task.status === "pending" && task.due_date && task.due_date < today;
+    if (overdue) li.className = "overdue";
+
+    const title = document.createElement("span");
+    title.textContent = task.title;
+    li.appendChild(title);
+
+    const right = document.createElement("span");
+    if (task.due_date) {
+      const date = document.createElement("span");
+      date.className = "task-date";
+      date.textContent = task.due_date;
+      right.appendChild(date);
+    }
+    if (task.status !== "pending") {
+      const badge = document.createElement("span");
+      badge.className = "badge";
+      badge.textContent = task.status;
+      right.appendChild(badge);
+    }
+    li.appendChild(right);
+    tasksEl.appendChild(li);
+  }
+}
+
+const uniEl = document.getElementById("universities");
+const unisEmpty = document.getElementById("unis-empty");
+document.getElementById("unis-count").textContent = universities.length ? `${universities.length} total` : "";
+
+if (!universities.length) {
+  unisEmpty.hidden = false;
+} else {
+  unisEmpty.hidden = true;
+  const groups = { reach: [], target: [], safety: [] };
+  for (const uni of universities) {
+    const cat = (uni.category || "target").toLowerCase();
+    if (groups[cat]) groups[cat].push(uni.university_name);
+    else groups.target.push(uni.university_name);
+  }
+  for (const [cat, names] of Object.entries(groups)) {
+    if (!names.length) continue;
+    const group = document.createElement("div");
+    group.className = "uni-group";
+    group.innerHTML = `<div class="uni-group-title">${cat}</div>`;
+    const ul = document.createElement("ul");
+    for (const name of names) {
+      const li = document.createElement("li");
+      li.textContent = name;
+      ul.appendChild(li);
+    }
+    group.appendChild(ul);
+    uniEl.appendChild(group);
+  }
+}
+
+const linkCode = data.link_code ?? "------";
+document.getElementById("link-code").textContent = linkCode;
+
+document.getElementById("copy-btn").onclick = async () => {
+  try {
+    await navigator.clipboard.writeText(linkCode);
+    document.getElementById("copy-btn").textContent = "Copied";
+    setTimeout(() => {
+      document.getElementById("copy-btn").textContent = "Copy";
+    }, 1500);
+  } catch {
+    document.getElementById("copy-btn").textContent = "Copy failed";
+  }
+};
+</script>
+</body>
+</html>

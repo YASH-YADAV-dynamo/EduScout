@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="card dashboard">
+    <header class="dash-header">
+      <p class="eyebrow">Your plan</p>
+      <h1 id="plan-title">Study Plan</h1>
+      <p id="plan-meta" class="plan-meta"></p>
+    </header>
+
+    <div id="profile-chips" class="chip-row"></div>
+
+    <div class="stats-grid">
+      <div class="stat">
+        <span id="stat-tasks" class="stat-value">0</span>
+        <span class="stat-label">Tasks</span>
+      </div>
+      <div class="stat">
+        <span id="stat-pending" class="stat-value">0</span>
+        <span class="stat-label">Pending</span>
+      </div>
+      <div class="stat">
+        <span id="stat-unis" class="stat-value">0</span>
+        <span class="stat-label">Universities</span>
+      </div>
+    </div>
+
+    <section class="panel">
+      <div class="panel-head">
+        <h2>Upcoming tasks</h2>
+        <span id="tasks-count" class="panel-count"></span>
+      </div>
+      <ul id="tasks" class="item-list"></ul>
+      <p id="tasks-empty" class="empty-state" hidden>No tasks yet — ask the agent to add deadlines.</p>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <h2>University shortlist</h2>
+        <span id="unis-count" class="panel-count"></span>
+      </div>
+      <div id="universities" class="uni-groups"></div>
+      <p id="unis-empty" class="empty-state" hidden>No universities yet — ask the agent to build your shortlist.</p>
+    </section>
+
+    <section class="panel link-panel">
+      <h2>Connect notifications</h2>
+      <p class="hint">Link WhatsApp or Telegram to get deadline reminders.</p>
+      <div class="link-box">
+        <span id="link-code" class="code">——</span>
+        <button id="copy-btn" type="button" class="btn secondary btn-sm">Copy</button>
+      </div>
+      <p class="hint link-hint">Send <strong>LINK CODE</strong> on WhatsApp or <strong>/link CODE</strong> on Telegram.</p>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

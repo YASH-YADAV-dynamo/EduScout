@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stage 3 — Experience & Preferences</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="card stage-card">
+    <header class="header"><p class="eyebrow">Stage 3 of 3</p><h1>Experience & preferences</h1>
+    <div class="progress"><div class="progress-bar" style="width:100%"></div></div></header>
+    <div class="form-scroll">
+      <form id="form" class="step-content">
+        <label>Full-time work months<input name="full_time_months" type="number" class="text-input" value="0" /></label>
+        <label>Internship months<input name="internship_months" type="number" class="text-input" value="0" /></label>
+        <label>Has research papers?<select name="has_papers" class="text-input"><option value="false">No</option><option value="true">Yes</option></select></label>
+        <label>Conference tier<select name="conference_tier" class="text-input"><option value="na">N/A</option><option>A*</option><option>A</option><option>B</option><option>C</option></select></label>
+        <label>Leadership roles?<select name="leadership_roles" class="text-input"><option value="false">No</option><option value="true">Yes</option></select></label>
+        <label>Campus type<select name="campus_type" class="text-input"><option value="urban">Urban</option><option value="suburban">Suburban</option><option value="rural">Rural</option><option value="no_preference">No preference</option></select></label>
+        <label>Post-study goal<input name="post_study_goal" class="text-input" /></label>
+        <label>Visa constraints<input name="visa_constraints" class="text-input" /></label>
+        <label><input type="checkbox" name="funding_open" /> Open to funded PhD programs</label>
+      </form>
+    </div>
+    <footer class="actions"><button id="submit-btn" type="button" class="btn primary">Submit profile</button></footer>
+    <p id="status" class="status" hidden></p>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Account</title>
+  <style>/* ChatGPT-inspired dark theme — grey + chalk */
+:root {
+  color-scheme: dark;
+
+  --bg: #212121;
+  --bg-elevated: #2f2f2f;
+  --bg-input: #383838;
+  --bg-hover: #3d3d3d;
+  --bg-selected: #404040;
+
+  --border: #4a4a4a;
+  --border-subtle: #3a3a3a;
+
+  --text: #ececec;
+  --text-muted: #b4b4b4;
+  --text-dim: #8e8e8e;
+
+  --accent: #d1d1d1;
+  --accent-strong: #f5f5f5;
+
+  --success-bg: #2a332a;
+  --success-text: #b8c9b8;
+  --error-bg: #3a2a2a;
+  --error-text: #d4a8a8;
+
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: "Söhne", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 12px;
+  font-family: var(--font);
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+.card {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius);
+  padding: 20px;
+  max-width: 520px;
+}
+
+h1 {
+  margin: 6px 0 14px;
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--accent-strong);
+}
+
+h2 {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin: 0 0 8px;
+}
+
+.eyebrow {
+  margin: 0;
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  font-weight: 500;
+}
+
+.hint {
+  margin-top: 8px;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  line-height: 1.4;
+}
+
+.btn {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 16px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.btn.primary {
+  background: var(--accent-strong);
+  color: #171717;
+  border-color: var(--accent-strong);
+}
+
+.btn.primary:hover:not(:disabled) {
+  background: #ffffff;
+}
+
+.btn.primary:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.btn.secondary {
+  background: transparent;
+  color: var(--text-muted);
+}
+
+.btn.secondary:hover {
+  background: var(--bg-hover);
+  color: var(--text);
+}
+
+.text-input,
+.select-input {
+  width: 100%;
+  padding: 11px 13px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 0.9375rem;
+  outline: none;
+  font-family: inherit;
+  color: var(--text);
+  background: var(--bg-input);
+}
+
+.text-input::placeholder {
+  color: var(--text-dim);
+}
+
+.text-input:focus,
+.select-input:focus {
+  border-color: #6b6b6b;
+  box-shadow: 0 0 0 1px #6b6b6b;
+}
+
+.status {
+  margin-top: 14px;
+  padding: 11px 13px;
+  border-radius: var(--radius-sm);
+  background: var(--success-bg);
+  color: var(--success-text);
+  font-size: 0.8125rem;
+  border: 1px solid var(--border-subtle);
+}
+
+.status.error {
+  background: var(--error-bg);
+  color: var(--error-text);
+}
+
+.badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.6875rem;
+  background: var(--bg-selected);
+  color: var(--text-muted);
+  border: 1px solid var(--border-subtle);
+  margin-left: 8px;
+}
+
+.code {
+  font-family: ui-monospace, "Cascadia Code", monospace;
+  font-size: 1.125rem;
+  letter-spacing: 0.08em;
+  color: var(--accent-strong);
+}
+
+.overdue {
+  color: #c9a0a0;
+}
+
+ul {
+  padding-left: 18px;
+  margin: 0;
+  color: var(--text-muted);
+}
+
+section {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+section:first-of-type {
+  border-top: none;
+  padding-top: 0;
+}
+
+
+.account {
+  max-width: 100%;
+}
+
+.id-panel .code {
+  font-size: 1.5rem;
+}
+
+.auth-status {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+.auth-status.connected {
+  color: var(--success-text);
+}
+
+.summary-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.summary-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border-subtle);
+  font-size: 0.875rem;
+}
+
+.summary-list li span:first-child {
+  color: var(--text-dim);
+}
+
+.summary-list li strong {
+  color: var(--text);
+  font-weight: 500;
+}
+
+.item-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.item-list li {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border-subtle);
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+.item-list li:last-child {
+  border-bottom: none;
+}
+
+.panel {
+  margin-top: 12px;
+  padding: 14px;
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+}
+
+.panel h2 {
+  margin-bottom: 6px;
+}
+
+.empty-state {
+  margin: 8px 0 0;
+  font-size: 0.8125rem;
+  color: var(--text-dim);
+  font-style: italic;
+}
+
+.link-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  padding: 12px;
+  background: var(--bg-elevated);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-sm);
+}
+
+.link-box .code {
+  flex: 1;
+  letter-spacing: 0.12em;
+}
+
+.btn-sm {
+  padding: 6px 12px;
+  font-size: 0.75rem;
+}
+
+.link-hint strong {
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.plan-meta {
+  margin: 4px 0 0;
+  font-size: 0.8125rem;
+  color: var(--text-dim);
+}
+</style>
+</head>
+<body>
+  <main class="card account">
+    <header>
+      <p class="eyebrow">Your account</p>
+      <h1 id="user-name">Student</h1>
+      <p id="user-email" class="plan-meta"></p>
+    </header>
+
+    <section class="panel id-panel">
+      <h2>Your ESID</h2>
+      <p class="hint">Use this to link Telegram notifications. Created when you connect with Google.</p>
+      <div class="link-box">
+        <span id="esid" class="code">AB----</span>
+        <button id="copy-esid-btn" type="button" class="btn secondary btn-sm">Copy</button>
+      </div>
+      <p class="hint link-hint">Telegram: open <strong>t.me/Bot?start=ESID</strong> after clicking Notify on a college.</p>
+    </section>
+
+    <section class="panel id-panel">
+      <h2>Legacy ID (SAA-)</h2>
+      <p class="hint">WhatsApp linking still uses SAA- public ID.</p>
+      <div class="link-box">
+        <span id="public-id" class="code">SAA-------</span>
+        <button id="copy-id-btn" type="button" class="btn secondary btn-sm">Copy</button>
+      </div>
+      <p class="hint link-hint">WhatsApp: send <strong>LINK SAA-XXXXXX</strong> · Telegram: <strong>/link SAA-XXXXXX</strong></p>
+    </section>
+
+    <section class="panel">
+      <h2>Sign-in</h2>
+      <p id="auth-status" class="auth-status">Not connected</p>
+      <p class="hint">Google sign-in happens once when you add this MCP connector and choose <strong>OAuth: Yes</strong>. There is no separate login inside the widget.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Linked channels</h2>
+      <ul id="channels" class="item-list"></ul>
+      <p id="channels-empty" class="empty-state">No channels linked yet.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Study profile</h2>
+      <ul id="profile-summary" class="summary-list"></ul>
+      <p id="profile-empty" class="empty-state">Complete the planning widget to fill your profile.</p>
+    </section>
+  </main>
+  <script>const bridge = window.openai ?? {};
+
+function readPayload() {
+  const output = bridge.toolOutput;
+  if (!output) return {};
+  if (output.structuredContent && typeof output.structuredContent === "object") {
+    return output.structuredContent;
+  }
+  if (typeof output === "object" && !Array.isArray(output)) return output;
+  return {};
+}
+
+const data = { ...readPayload(), ...(bridge.toolInput ?? {}) };
+
+document.getElementById("user-name").textContent = data.name ?? "Student";
+document.getElementById("user-email").textContent = data.email ?? "";
+
+const publicId = data.public_id ?? "SAA-------";
+document.getElementById("public-id").textContent = publicId;
+
+const esid = data.esid ?? "AB----";
+document.getElementById("esid").textContent = esid;
+
+document.getElementById("copy-esid-btn").onclick = async () => {
+  try {
+    await navigator.clipboard.writeText(esid);
+    document.getElementById("copy-esid-btn").textContent = "Copied";
+    setTimeout(() => {
+      document.getElementById("copy-esid-btn").textContent = "Copy";
+    }, 1500);
+  } catch {
+    document.getElementById("copy-esid-btn").textContent = "Failed";
+  }
+};
+
+document.getElementById("copy-id-btn").onclick = async () => {
+  try {
+    await navigator.clipboard.writeText(publicId);
+    document.getElementById("copy-id-btn").textContent = "Copied";
+    setTimeout(() => {
+      document.getElementById("copy-id-btn").textContent = "Copy";
+    }, 1500);
+  } catch {
+    document.getElementById("copy-id-btn").textContent = "Failed";
+  }
+};
+
+const authEl = document.getElementById("auth-status");
+if (data.mcp_oauth_at_connect || data.signed_in_with_google) {
+  authEl.textContent = "Signed in via Google (MCP connect)";
+  authEl.classList.add("connected");
+} else {
+  authEl.textContent = "Guest — reconnect MCP with OAuth: Yes to sign in with Google";
+}
+
+const channelsEl = document.getElementById("channels");
+const channelsEmpty = document.getElementById("channels-empty");
+const channels = data.linked_channels ?? [];
+
+if (channels.length) {
+  channelsEmpty.hidden = true;
+  for (const ch of channels) {
+    const li = document.createElement("li");
+    const label = ch.channel_type === "whatsapp" ? "WhatsApp" : "Telegram";
+    li.textContent = `${label}: ${ch.external_id}`;
+    channelsEl.appendChild(li);
+  }
+} else {
+  channelsEmpty.hidden = false;
+}
+
+const profile = data.profile ?? {};
+const profileEl = document.getElementById("profile-summary");
+const profileEmpty = document.getElementById("profile-empty");
+const fields = [
+  ["Region", profile.region],
+  ["Degree", profile.degree],
+  ["Field", profile.major],
+  ["CGPA", profile.cgpa],
+  ["Budget", profile.budget_range],
+  ["Intake", profile.target_intake],
+  ["Priority", profile.priority],
+];
+
+let hasProfile = false;
+for (const [label, value] of fields) {
+  if (!value) continue;
+  hasProfile = true;
+  const li = document.createElement("li");
+  li.innerHTML = `<span>${label}</span><strong>${value}</strong>`;
+  profileEl.appendChild(li);
+}
+profileEmpty.hidden = hasProfile;
+</script>
+</body>
+</html>

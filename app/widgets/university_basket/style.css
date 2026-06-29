@@ -1,0 +1,145 @@
+.basket-wrap {
+  max-height: 520px;
+  display: flex;
+  flex-direction: column;
+}
+
+.basket-header h1 {
+  font-size: 1rem;
+  margin-bottom: 4px;
+}
+
+.header-score {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  margin: 0 0 12px;
+}
+
+.basket-scroll {
+  overflow-y: auto;
+  flex: 1;
+  max-height: 420px;
+  padding-right: 4px;
+}
+
+.sub-hint {
+  margin-top: 12px;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  text-align: center;
+}
+
+.category {
+  margin-top: 18px;
+}
+
+.category h2 {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+  margin-bottom: 10px;
+}
+
+.category h2 .count {
+  opacity: 0.6;
+  font-weight: normal;
+}
+
+.card-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.uni-card {
+  background: var(--surface-2, rgba(255, 255, 255, 0.04));
+  border: 1px solid var(--border, rgba(255, 255, 255, 0.08));
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+
+.uni-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.uni-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.uni-header strong {
+  font-size: 0.9375rem;
+  display: block;
+}
+
+.badge {
+  font-size: 0.6875rem;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(99, 102, 241, 0.2);
+  color: #a5b4fc;
+}
+
+.uni-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  margin-top: 6px;
+}
+
+.uni-meta.secondary {
+  font-size: 0.75rem;
+}
+
+.tuition.under { color: #4ade80; }
+.tuition.ok { color: #fbbf24; }
+.tuition.over { color: #f87171; }
+
+.match-bar {
+  font-weight: 600;
+  color: var(--accent, #818cf8);
+}
+
+.notify-btn {
+  flex-shrink: 0;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(129, 140, 248, 0.4);
+  background: rgba(99, 102, 241, 0.15);
+  color: #c7d2fe;
+  font-size: 0.8125rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.notify-btn:hover:not(:disabled) {
+  background: rgba(99, 102, 241, 0.3);
+}
+
+.notify-btn:disabled,
+.notify-btn.notified {
+  opacity: 0.85;
+  cursor: default;
+  border-color: rgba(74, 222, 128, 0.4);
+  background: rgba(34, 197, 94, 0.12);
+  color: #86efac;
+}
+
+.reach .uni-card { border-left: 3px solid #f87171; }
+.target .uni-card { border-left: 3px solid #fbbf24; }
+.safety .uni-card { border-left: 3px solid #4ade80; }
+
+.empty {
+  color: var(--text-dim);
+  font-size: 0.875rem;
+}
+
+.country, .accept, .deadline {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+}

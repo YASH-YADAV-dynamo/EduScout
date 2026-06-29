@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stage 1 — Personal & Academic</title>
+  <style>/* ChatGPT-inspired dark theme — grey + chalk */
+:root {
+  color-scheme: dark;
+
+  --bg: #212121;
+  --bg-elevated: #2f2f2f;
+  --bg-input: #383838;
+  --bg-hover: #3d3d3d;
+  --bg-selected: #404040;
+
+  --border: #4a4a4a;
+  --border-subtle: #3a3a3a;
+
+  --text: #ececec;
+  --text-muted: #b4b4b4;
+  --text-dim: #8e8e8e;
+
+  --accent: #d1d1d1;
+  --accent-strong: #f5f5f5;
+
+  --success-bg: #2a332a;
+  --success-text: #b8c9b8;
+  --error-bg: #3a2a2a;
+  --error-text: #d4a8a8;
+
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: "Söhne", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 12px;
+  font-family: var(--font);
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+.card {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius);
+  padding: 20px;
+  max-width: 520px;
+}
+
+h1 {
+  margin: 6px 0 14px;
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--accent-strong);
+}
+
+h2 {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin: 0 0 8px;
+}
+
+.eyebrow {
+  margin: 0;
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  font-weight: 500;
+}
+
+.hint {
+  margin-top: 8px;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  line-height: 1.4;
+}
+
+.btn {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 16px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.btn.primary {
+  background: var(--accent-strong);
+  color: #171717;
+  border-color: var(--accent-strong);
+}
+
+.btn.primary:hover:not(:disabled) {
+  background: #ffffff;
+}
+
+.btn.primary:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.btn.secondary {
+  background: transparent;
+  color: var(--text-muted);
+}
+
+.btn.secondary:hover {
+  background: var(--bg-hover);
+  color: var(--text);
+}
+
+.text-input,
+.select-input {
+  width: 100%;
+  padding: 11px 13px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 0.9375rem;
+  outline: none;
+  font-family: inherit;
+  color: var(--text);
+  background: var(--bg-input);
+}
+
+.text-input::placeholder {
+  color: var(--text-dim);
+}
+
+.text-input:focus,
+.select-input:focus {
+  border-color: #6b6b6b;
+  box-shadow: 0 0 0 1px #6b6b6b;
+}
+
+.status {
+  margin-top: 14px;
+  padding: 11px 13px;
+  border-radius: var(--radius-sm);
+  background: var(--success-bg);
+  color: var(--success-text);
+  font-size: 0.8125rem;
+  border: 1px solid var(--border-subtle);
+}
+
+.status.error {
+  background: var(--error-bg);
+  color: var(--error-text);
+}
+
+.badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.6875rem;
+  background: var(--bg-selected);
+  color: var(--text-muted);
+  border: 1px solid var(--border-subtle);
+  margin-left: 8px;
+}
+
+.code {
+  font-family: ui-monospace, "Cascadia Code", monospace;
+  font-size: 1.125rem;
+  letter-spacing: 0.08em;
+  color: var(--accent-strong);
+}
+
+.overdue {
+  color: #c9a0a0;
+}
+
+ul {
+  padding-left: 18px;
+  margin: 0;
+  color: var(--text-muted);
+}
+
+section {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+section:first-of-type {
+  border-top: none;
+  padding-top: 0;
+}
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
+.stage-card {
+  max-height: min(480px, 72vh);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 0;
+}
+
+.stage-card > .header {
+  flex-shrink: 0;
+  padding: 16px 16px 0;
+}
+
+.form-scroll {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  padding: 8px 16px;
+  touch-action: pan-y;
+}
+
+.stage-card > .actions {
+  flex-shrink: 0;
+  padding: 12px 16px 16px;
+  margin: 0;
+  border-top: 1px solid var(--border-subtle);
+  background: var(--bg-elevated);
+}
+
+.stage-card > .status {
+  flex-shrink: 0;
+  margin: 0 16px 12px;
+}
+
+.step-content label {
+  display: block;
+  margin: 10px 0;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+.text-input {
+  width: 100%;
+  margin-top: 4px;
+}
+
+.progress {
+  height: 4px;
+  background: var(--bg-input);
+  border-radius: 999px;
+  margin: 12px 0;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  background: var(--accent-strong);
+  border-radius: 999px;
+}
+
+.hint {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  margin: 8px 0;
+}
+
+.card { padding: 16px; }
+.step-content label { display: block; margin: 10px 0; font-size: 0.875rem; color: var(--text-muted); }
+.text-input { width: 100%; margin-top: 4px; padding: 8px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface-2); color: var(--text); }
+.btn.primary { background: var(--accent); color: #fff; border: none; padding: 10px 16px; border-radius: 8px; cursor: pointer; }
+.progress { height: 4px; background: var(--border); border-radius: 4px; margin: 12px 0; }
+.progress-bar { height: 100%; background: var(--accent); border-radius: 4px; }
+.status.error { color: #f87171; }
+</style>
+</head>
+<body>
+  <main class="card stage-card">
+    <header class="header">
+      <p class="eyebrow">Stage 1 of 3 — Personal & Academic</p>
+      <h1>Your profile basics</h1>
+      <div class="progress"><div id="progress-bar" class="progress-bar" style="width:33%"></div></div>
+    </header>
+    <div class="form-scroll">
+      <form id="form" class="step-content">
+        <label>Name<input name="name" class="text-input" required /></label>
+        <label>Current degree<select name="degree" class="text-input"><option>Bachelor's</option><option>Master's</option></select></label>
+        <label>Major / field<input name="major" class="text-input" required /></label>
+        <label>CGPA / GPA<input name="cgpa" type="number" step="0.01" class="text-input" required /></label>
+        <label>GPA scale<input name="gpa_scale" class="text-input" placeholder="10 or 4.0" /></label>
+        <label>Home university<input name="university_name" class="text-input" /></label>
+        <label>Institution tier<select name="institution_tier" class="text-input"><option value="top_50">Top 50</option><option value="51_200">51-200</option><option value="201_500">201-500</option><option value="500_plus">500+</option><option value="not_ranked">Not ranked</option></select></label>
+        <label>Target degree<select name="target_degree" class="text-input"><option>MS</option><option>MBA</option><option>PhD</option><option>MEng</option></select></label>
+        <label>Target field<input name="target_field" class="text-input" required /></label>
+        <label>Preferred countries (comma-separated)<input name="preferred_countries" class="text-input" placeholder="USA, Canada, UK" required /></label>
+        <label>Target intake<input name="target_intake" class="text-input" placeholder="Fall 2027" required /></label>
+        <label>Annual tuition budget USD<input name="budget_usd" type="number" class="text-input" required /></label>
+        <label>Living budget USD<input name="living_budget_usd" type="number" class="text-input" /></label>
+        <label><input type="checkbox" name="scholarship_seeking" /> Seeking scholarships</label>
+      </form>
+    </div>
+    <footer class="actions"><button id="submit-btn" type="button" class="btn primary">Submit Stage 1</button></footer>
+    <p id="status" class="status" hidden></p>
+  </main>
+  <script>const bridge = window.openai ?? {};
+
+function readPayload() {
+  const output = bridge.toolOutput;
+  if (!output) return {};
+  if (output.structuredContent && typeof output.structuredContent === "object") return output.structuredContent;
+  if (typeof output === "object" && !Array.isArray(output)) return output;
+  return {};
+}
+
+function resolvePlanId() {
+  const payload = readPayload();
+  const state = bridge.widgetState ?? {};
+  return state.plan_id ?? payload.plan_id ?? payload.profile?.plan_id ?? null;
+}
+
+function persistState(extra = {}) {
+  bridge.setWidgetState?.({ ...(bridge.widgetState ?? {}), ...extra });
+}
+
+async function ensurePlan(region = "Europe") {
+  let planId = resolvePlanId();
+  if (planId) {
+    persistState({ plan_id: planId });
+    return planId;
+  }
+  let data = null;
+  if (bridge.callTool) {
+    data = await bridge.callTool("start_planning_widget", { region });
+    data = data?.structuredContent ?? data;
+  }
+  if (!data?.plan_id) {
+    const res = await fetch("/api/onboarding/start", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ region }),
+    });
+    if (!res.ok) throw new Error("Could not create plan");
+    data = await res.json();
+  }
+  planId = data.plan_id;
+  persistState({ plan_id: planId });
+  return planId;
+}
+
+async function loadSavedProfile(planId) {
+  const payload = readPayload();
+  if (payload.profile && Object.keys(payload.profile).length) return payload.profile;
+  try {
+    const res = await fetch(`/api/onboarding/profile/${planId}`);
+    if (res.ok) {
+      const data = await res.json();
+      return data.profile ?? {};
+    }
+  } catch {
+    /* offline / same-origin blocked */
+  }
+  return {};
+}
+
+function setStatus(message, isError = false) {
+  const el = document.getElementById("status");
+  if (!el) return;
+  el.hidden = !message;
+  el.textContent = message || "";
+  el.classList.toggle("error", isError);
+}
+
+function setField(form, name, value) {
+  if (value === undefined || value === null || value === "") return;
+  const field = form.elements.namedItem(name);
+  if (!field) return;
+  if (field.type === "checkbox") field.checked = !!value;
+  else if (Array.isArray(value)) field.value = value.join(", ");
+  else field.value = String(value);
+}
+
+async function postJson(path, payload) {
+  const res = await fetch(path, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) {
+    const msg = data.detail || data.message || data.error || `Request failed (${res.status})`;
+    throw new Error(typeof msg === "string" ? msg : JSON.stringify(msg));
+  }
+  return data;
+}
+
+async function submitStage({ stage, payload, nextTool, nextMessage, buttonLabel = "Submit" }) {
+  const btn = document.getElementById("submit-btn");
+  if (!btn) throw new Error("Missing submit button");
+  const defaultLabel = btn.dataset.defaultLabel || btn.textContent;
+  btn.dataset.defaultLabel = defaultLabel;
+  btn.disabled = true;
+  btn.textContent = "Saving…";
+  setStatus("Saving…", false);
+
+  try {
+    const planId = await ensurePlan();
+    payload.plan_id = planId;
+    const result = await postJson(`/api/onboarding/stage${stage}`, payload);
+    persistState({ plan_id: planId, stage_complete: stage });
+
+    if (bridge.callTool) {
+      await bridge.callTool("save_onboarding_stage", { plan_id: planId, stage, data: payload }).catch(() => {});
+    }
+
+    setStatus(`Stage ${stage} saved.`, false);
+    btn.textContent = "Saved ✓";
+
+    if (nextTool && bridge.callTool) {
+      await bridge.callTool(nextTool, { plan_id: planId });
+    }
+    if (nextMessage) {
+      bridge.sendFollowUpMessage?.({ prompt: nextMessage });
+    }
+    return result;
+  } catch (err) {
+    setStatus(err.message || "Save failed", true);
+    btn.disabled = false;
+    btn.textContent = defaultLabel;
+    throw err;
+  }
+}
+
+function collectStage1(form) {
+  const fd = new FormData(form);
+  return {
+    name: fd.get("name"),
+    degree: fd.get("degree"),
+    major: fd.get("major"),
+    cgpa: Number(fd.get("cgpa")),
+    gpa_scale: fd.get("gpa_scale"),
+    university_name: fd.get("university_name"),
+    institution_tier: fd.get("institution_tier"),
+    target_degree: fd.get("target_degree"),
+    target_field: fd.get("target_field"),
+    preferred_countries: String(fd.get("preferred_countries")).split(",").map((s) => s.trim()).filter(Boolean),
+    target_intake: fd.get("target_intake"),
+    budget_usd: Number(fd.get("budget_usd")),
+    living_budget_usd: fd.get("living_budget_usd") ? Number(fd.get("living_budget_usd")) : null,
+    scholarship_seeking: !!fd.get("scholarship_seeking"),
+  };
+}
+
+function prefillStage1(form, profile) {
+  setField(form, "degree", profile.degree);
+  setField(form, "major", profile.major || profile.target_field);
+  setField(form, "cgpa", profile.cgpa);
+  setField(form, "gpa_scale", profile.gpa_scale);
+  setField(form, "university_name", profile.university_name);
+  setField(form, "institution_tier", profile.institution_tier);
+  setField(form, "target_degree", profile.target_degree);
+  setField(form, "target_field", profile.target_field);
+  setField(form, "preferred_countries", profile.preferred_countries);
+  setField(form, "target_intake", profile.target_intake);
+  setField(form, "budget_usd", profile.budget_usd);
+  setField(form, "living_budget_usd", profile.living_budget_usd);
+  if (profile.scholarship_seeking) setField(form, "scholarship_seeking", true);
+}
+
+async function initStage1() {
+  const form = document.getElementById("form");
+  const planId = await ensurePlan();
+  const profile = await loadSavedProfile(planId);
+  prefillStage1(form, profile);
+
+  document.getElementById("submit-btn").onclick = async () => {
+    if (!form.reportValidity()) return;
+    await submitStage({
+      stage: 1,
+      payload: collectStage1(form),
+      nextTool: "show_stage2_widget",
+      nextMessage: "Stage 1 saved. Continuing with Stage 2 — exam scores and documents.",
+    });
+  };
+}
+
+initStage1().catch((err) => setStatus(err.message, true));
+</script>
+</body>
+</html>

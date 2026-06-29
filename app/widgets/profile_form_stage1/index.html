@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stage 1 — Personal & Academic</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="card stage-card">
+    <header class="header">
+      <p class="eyebrow">Stage 1 of 3 — Personal & Academic</p>
+      <h1>Your profile basics</h1>
+      <div class="progress"><div id="progress-bar" class="progress-bar" style="width:33%"></div></div>
+    </header>
+    <div class="form-scroll">
+      <form id="form" class="step-content">
+        <label>Name<input name="name" class="text-input" required /></label>
+        <label>Current degree<select name="degree" class="text-input"><option>Bachelor's</option><option>Master's</option></select></label>
+        <label>Major / field<input name="major" class="text-input" required /></label>
+        <label>CGPA / GPA<input name="cgpa" type="number" step="0.01" class="text-input" required /></label>
+        <label>GPA scale<input name="gpa_scale" class="text-input" placeholder="10 or 4.0" /></label>
+        <label>Home university<input name="university_name" class="text-input" /></label>
+        <label>Institution tier<select name="institution_tier" class="text-input"><option value="top_50">Top 50</option><option value="51_200">51-200</option><option value="201_500">201-500</option><option value="500_plus">500+</option><option value="not_ranked">Not ranked</option></select></label>
+        <label>Target degree<select name="target_degree" class="text-input"><option>MS</option><option>MBA</option><option>PhD</option><option>MEng</option></select></label>
+        <label>Target field<input name="target_field" class="text-input" required /></label>
+        <label>Preferred countries (comma-separated)<input name="preferred_countries" class="text-input" placeholder="USA, Canada, UK" required /></label>
+        <label>Target intake<input name="target_intake" class="text-input" placeholder="Fall 2027" required /></label>
+        <label>Annual tuition budget USD<input name="budget_usd" type="number" class="text-input" required /></label>
+        <label>Living budget USD<input name="living_budget_usd" type="number" class="text-input" /></label>
+        <label><input type="checkbox" name="scholarship_seeking" /> Seeking scholarships</label>
+      </form>
+    </div>
+    <footer class="actions"><button id="submit-btn" type="button" class="btn primary">Submit Stage 1</button></footer>
+    <p id="status" class="status" hidden></p>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

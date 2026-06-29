@@ -1,0 +1,155 @@
+.progress {
+  height: 4px;
+  background: var(--bg-input);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  background: var(--accent);
+  transition: width 0.25s ease;
+}
+
+.step-indicator {
+  margin: 8px 0 0;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+}
+
+.step-content {
+  margin-top: 20px;
+  min-height: 160px;
+}
+
+.field-label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+}
+
+.option-grid {
+  display: grid;
+  gap: 8px;
+}
+
+.option-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+  background: var(--bg-input);
+  text-align: left;
+  font-family: inherit;
+  color: var(--text);
+}
+
+.option-card:hover {
+  background: var(--bg-hover);
+  border-color: #5a5a5a;
+}
+
+.option-card.selected {
+  border-color: var(--accent);
+  background: var(--bg-selected);
+}
+
+.option-card strong {
+  display: block;
+  margin-bottom: 3px;
+  font-weight: 500;
+  color: var(--accent-strong);
+}
+
+.option-card span {
+  font-size: 0.8125rem;
+  color: var(--text-dim);
+}
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.chip {
+  border: 1px solid var(--border);
+  background: var(--bg-input);
+  border-radius: 999px;
+  padding: 5px 11px;
+  font-size: 0.8125rem;
+  cursor: pointer;
+  font-family: inherit;
+  color: var(--text-muted);
+}
+
+.chip:hover {
+  background: var(--bg-hover);
+  color: var(--text);
+}
+
+.chip.selected {
+  background: var(--bg-selected);
+  border-color: var(--accent);
+  color: var(--accent-strong);
+}
+
+.summary-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.summary-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border-subtle);
+  font-size: 0.875rem;
+}
+
+.summary-list li span:first-child {
+  color: var(--text-dim);
+}
+
+.summary-list li strong {
+  color: var(--text);
+  font-weight: 500;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.success-box pre {
+  white-space: pre-wrap;
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  font-size: 0.8125rem;
+  margin: 12px 0 0;
+  color: var(--text-muted);
+  font-family: inherit;
+  line-height: 1.5;
+}
+
+.success-box p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
+.success-box strong {
+  color: var(--accent-strong);
+}

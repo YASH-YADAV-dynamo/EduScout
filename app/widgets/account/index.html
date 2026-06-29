@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Account</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="card account">
+    <header>
+      <p class="eyebrow">Your account</p>
+      <h1 id="user-name">Student</h1>
+      <p id="user-email" class="plan-meta"></p>
+    </header>
+
+    <section class="panel id-panel">
+      <h2>Your ESID</h2>
+      <p class="hint">Use this to link Telegram notifications. Created when you connect with Google.</p>
+      <div class="link-box">
+        <span id="esid" class="code">AB----</span>
+        <button id="copy-esid-btn" type="button" class="btn secondary btn-sm">Copy</button>
+      </div>
+      <p class="hint link-hint">Telegram: open <strong>t.me/Bot?start=ESID</strong> after clicking Notify on a college.</p>
+    </section>
+
+    <section class="panel id-panel">
+      <h2>Legacy ID (SAA-)</h2>
+      <p class="hint">WhatsApp linking still uses SAA- public ID.</p>
+      <div class="link-box">
+        <span id="public-id" class="code">SAA-------</span>
+        <button id="copy-id-btn" type="button" class="btn secondary btn-sm">Copy</button>
+      </div>
+      <p class="hint link-hint">WhatsApp: send <strong>LINK SAA-XXXXXX</strong> · Telegram: <strong>/link SAA-XXXXXX</strong></p>
+    </section>
+
+    <section class="panel">
+      <h2>Sign-in</h2>
+      <p id="auth-status" class="auth-status">Not connected</p>
+      <p class="hint">Google sign-in happens once when you add this MCP connector and choose <strong>OAuth: Yes</strong>. There is no separate login inside the widget.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Linked channels</h2>
+      <ul id="channels" class="item-list"></ul>
+      <p id="channels-empty" class="empty-state">No channels linked yet.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Study profile</h2>
+      <ul id="profile-summary" class="summary-list"></ul>
+      <p id="profile-empty" class="empty-state">Complete the planning widget to fill your profile.</p>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
